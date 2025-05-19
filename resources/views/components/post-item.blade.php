@@ -1,6 +1,6 @@
 <div class="max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
     <a href="#">
-        <img class="rounded-t-lg" src="https://www.forbes.com/advisor/wp-content/uploads/2022/06/How_To_Start_A_Blog_-_article_image.jpg" alt="" />
+        <img class="rounded-t-lg" src="{{ Storage::url($post->image) }}" alt="" />
     </a>
     <div class="p-5 flex flex-col h-full">
         <a href="#">

@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="flex">
-                <a class="flex items-center" href="#">
+                <a class="flex items-center" href="{{ route('post.create') }}">
                     <x-secondary-button>
                         Create Post
                     </x-secondary-button>
