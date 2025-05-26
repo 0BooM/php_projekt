@@ -19,7 +19,7 @@
 
         @if($user->image)
         <div class="mb-4">
-            <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full">
+            <img src="{{ $user->imageUrl() }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full">
         </div>
         @endif
 

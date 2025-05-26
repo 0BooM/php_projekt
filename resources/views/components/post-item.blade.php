@@ -3,7 +3,10 @@
         <img class="rounded-t-lg" src="{{ Storage::url($post->image) }}" alt="" />
     </a>
     <div class="p-5 flex flex-col h-full">
-        <a href="#">
+        <a href="{{ route('post.show', 
+                    ['username' => $post->user->username, 
+                    'post' => $post->slug]) }}" 
+        class="mb-2">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {{$post->title}}
             </h5>
