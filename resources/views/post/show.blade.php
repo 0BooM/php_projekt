@@ -32,11 +32,10 @@
                 </div>
                 <!-- Post Content -->
                 <div class="mt-4 text-lg"> {{ $post->content }}</div>
-                <div class="mt-4">
+                <div class="mt-10">
                     <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full shadow hover:bg-blue-200 transition">
                         {{ $post->category->name }}
                     </span>
                 </div>
-
         </div>
 </x-app-layout>
