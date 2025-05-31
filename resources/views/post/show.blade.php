@@ -4,15 +4,13 @@
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
                 <div class="flex gap-4 mb-4">
-                    @if($post->user->image)
-                    <img src="{{ $post->user->imageUrl() }}" alt="{{ $post->user->name }}" class="w-12 h-12 rounded-full">
-                    @else
-                    <img src="https://static.everypixel.com/ep-pixabay/0329/8099/0858/84037/3298099085884037069-head.png" alt="" class="w-12 h-12 rounded-full">
-                    @endif
+                    <x-user-avatar :user="$post->user"/>
                     <!-- Author Info -->
                     <div class="flex flex-col">
                         <div class="flex gap-4">
-                            <h3>{{$post->user->name}}</h3>
+                            <a href="{{ route('profile.show', $post->user) }}"
+                                class="hover:underline">{{$post->user->name}}</a>
+
                             <h3>•</h3>
                             <a href="#" class="text-blue-500 hover:underline hover:text-blue-700">Follow</a>
                         </div>
