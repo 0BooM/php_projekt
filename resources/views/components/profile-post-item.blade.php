@@ -1,6 +1,6 @@
 <div class="flex bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mb-8">
     <a class="flex-none w-48 h-auto" href="{{ route('post.show', ['username' => $post->user->username, 'post' => $post->slug]) }}">
-        <img class="w-full h-full max-h-64 object-cover rounded-l-lg" src="{{ Storage::url($post->image) }}" alt="" />
+        <img class="w-full h-full max-h-64 object-cover rounded-l-lg" src="{{ $post->imageUrl() }}" alt="" />
     </a>
     <div class="p-5 flex flex-col flex-1">
         <a href="{{ route('post.show', ['username' => $post->user->username, 'post' => $post->slug]) }}" class="mb-2">
@@ -12,17 +12,7 @@
             {{ Str::words($post->content, 20) }}
         </p>
         <div class="flex items-center justify-center gap-3 border-t pt-4">
-            <div class="flex gap-2">
-                @if($post->user->image)
-                <img src="{{ $post->user->imageUrl() }}" alt="{{ $post->user->name }}" class="w-12 h-12 rounded-full">
-                @else
-                <img src="https://static.everypixel.com/ep-pixabay/0329/8099/0858/84037/3298099085884037069-head.png" alt="" class="w-12 h-12 rounded-full">
-                @endif
-                <div>
-                    <p>{{ $post->user->name }}</p>
-                    <p>{{ $post->created_at->format("M d, Y") }}</p>
-                </div>
-            </div>
+            
             <a href="{{ route('post.show', ['username' => $post->user->username, 'post' => $post->slug]) }}" class="ml-auto inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Read more
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">

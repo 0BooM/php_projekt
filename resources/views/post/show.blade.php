@@ -7,13 +7,17 @@
                     <x-user-avatar :user="$post->user"/>
                     <!-- Author Info -->
                     <div class="flex flex-col">
-                        <div class="flex gap-4">
+                        <x-follow-container :user="$post->user" class="flex gap-4">
                             <a href="{{ route('profile.show', $post->user) }}"
                                 class="hover:underline">{{$post->user->name}}</a>
-
+                            @auth
                             <h3>•</h3>
-                            <a href="#" class="text-blue-500 hover:underline hover:text-blue-700">Follow</a>
-                        </div>
+                            <button class="hover:underline"
+                            x-text="following ? 'Unfollow' : 'Follow'"
+                            :class="following ? 'text-red-500' : 'text-blue-500'"
+                            @click="follow()"></button>
+                            @endauth
+                        </x-follow-container>
                         <div class="flex gap-2 text-sm">
                             <h4 class="text-gray-500">{{ $post->readTime() }} min read</h4>
                             <h4>•</h4>
@@ -22,8 +26,21 @@
                     </div>
                 </div>
                 <h1 class="text-3xl font-bold text-center">{{ $post->title }}</h1>
+
+                <!-- Edit btns -->
+                @if($post->user_id === Auth::id())
+                <div class="mt-8 pt-4 border-t">
+                    <x-primary-button href="{{ route('post.edit', $post->id) }}" class="mr-4">Edit Post</x-primary-button>
+                    <form action="{{ route('post.destroy', $post) }}" method="POST" class="inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <x-danger-button>Delete Post</x-danger-button>
+                    </form>
+                </div>
+                @endif
+
                 <!-- Post Stats -->
-                <x-stats-button/>
+                <x-stats-button :post="$post"/>
                 <!-- Post Image -->
                 <div class="mt-4">
                     <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full h-96 mt-4 rounded-lg object-cover">

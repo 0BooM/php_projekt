@@ -1,13 +1,13 @@
 <div class="max-w-96 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
     <a href="{{ route('post.show', 
                     ['username' => $post->user->username, 
-                    'post' => $post->slug]) }}">
-        <img class="rounded-t-lg" src="{{ Storage::url($post->image) }}" alt="" />
+                    'post' => $post->id]) }}">
+        <img class="rounded-t-lg" src="{{ $post->imageUrl() }}" alt="" />
     </a>
     <div class="p-5 flex flex-col h-full">
         <a href="{{ route('post.show', 
                     ['username' => $post->user->username, 
-                    'post' => $post->slug]) }}" 
+                    'post' => $post->id]) }}" 
         class="mb-2">
             <h5 class=" text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {{$post->title}}
@@ -18,19 +18,15 @@
         </p>
         <div class="flex items-center justify-center gap-3 border-t pt-4">
             <div class="flex gap-2">
-                @if($post->user->image)
-                <img src="{{ $post->user->imageUrl() }}" alt="{{ $post->user->name }}" class="w-12 h-12 rounded-full">
-                @else
-                <img src="https://static.everypixel.com/ep-pixabay/0329/8099/0858/84037/3298099085884037069-head.png" alt="" class="w-12 h-12 rounded-full">
-                @endif
                 <div >
-                    <p>{{ $post->user->name }}</p>
-                    <p>{{ $post->created_at->format("M d, Y") }}</p>
+                    <a href="{{ route('profile.show', $post->user) }}" class="hover:underline">{{$post->user->name}}</a>
+                    <p class="text-gray-500">{{ $post->published_at->format("M d, Y") }}</p>
                 </div>
+
             </div>
             <a href="{{ route('post.show', 
                     ['username' => $post->user->username, 
-                    'post' => $post->slug]) }}" 
+                    'post' => $post->id]) }}" 
                     class=" ml-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 
                 Read more
