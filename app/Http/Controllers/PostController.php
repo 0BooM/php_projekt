@@ -22,7 +22,7 @@ class PostController extends Controller
         $query = Post::with(['user', 'media'])
         ->where('published_at', '<=', now())
         ->withCount('likes')->latest();
-        if($user){
+        if($user && !$user->isAdmin()){
             $ids = $user->following()->pluck('users.id');
             $query->whereIn('user_id', $ids);
         }
@@ -79,7 +79,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        if ($post->user_id !== Auth::id()) {
+        if ($post->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized action');
         }
         return view('post.edit', [
@@ -93,7 +93,7 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
-        if ($post->user_id !== Auth::id()) {
+        if ($post->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
             abort(403, 'Unauthorized action');
         }
 
@@ -104,7 +104,9 @@ class PostController extends Controller
             $post->addMediaFromRequest('image')
                 ->toMediaCollection();
         }
-
+        if(Auth::user()->isAdmin()){
+            return redirect()->route('dashboard');
+        }
         return redirect()->route('post.myPosts');
     }
 
@@ -113,7 +115,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-    if($post->user_id !== Auth::id()){
+    if($post->user_id !== Auth::id() && !Auth::user()->isAdmin()){
         abort(403, 'Unauthorized action');
     }
         $post->delete();
@@ -129,7 +131,7 @@ class PostController extends Controller
         ->with(['user', 'media'])->
         withCount('likes')->latest();
 
-        if($user){
+        if($user && !$user->isAdmin()){
             $ids = $user->following()->pluck('users.id');
             $query->whereIn('user_id', $ids);
         }

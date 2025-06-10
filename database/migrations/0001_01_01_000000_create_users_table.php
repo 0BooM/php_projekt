@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('bio')->nullable();
             $table->string('password');
+            $table->string('role')->default('user');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('role')->references('role')->on('roles');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

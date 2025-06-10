@@ -11,10 +11,35 @@
                 </div>
             </div>
             <div class="flex">
+                @if(Auth::check() && Auth::user()->isAdmin())
+                <a class="flex items-center me-2" href="{{ route('admin.dashboard') }}">
+                    <x-danger-button class="px-2 py-1 text-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3l7 4v5c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V7l7-4z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+                        </svg>
+                        <span class="hidden sm:inline">Admin Dashboard</span>
+                        <span class="inline sm:hidden">Admin</span>
+                    </x-danger-button>
+                </a>
+                @endif
                 <a class="flex items-center" href="{{ route('post.create') }}">
-                    <x-secondary-button>
-                        Create Post
+                    <x-secondary-button class="px-2 py-1 text-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span class="hidden sm:inline">Create Post</span>
+                        <span class="inline sm:hidden">Post</span>
                     </x-secondary-button>
+                </a>
+                <a class="flex items-center ml-4" href="{{ route('leaderboard') }}">
+                    <x-third-button class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 17l6-6 4 4 8-8" />
+                        </svg>
+                        <span class="hidden sm:inline">Leaderboard</span>
+                        <span class="inline sm:hidden">Top</span>
+                    </x-third-button>
                 </a>
                 @auth
                 <!-- Settings Dropdown -->
@@ -63,6 +88,13 @@
                     Login
                 </a>
                 @endguest
+                <form action="{{ route('user.search') }}" method="GET" class="hidden sm:flex items-center ml-4">
+                    <input type="text" name="q" placeholder="Search users..." class="px-2 py-1 border rounded text-sm focus:outline-none focus:ring focus:border-blue-300" required>
+                    <button type="submit" class="ml-2 px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600">
+                        Search
+                    </button>
+                </form>
+
                 <!-- Hamburger -->
                 <div class="-me-2 flex items-center sm:hidden">
                     <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">

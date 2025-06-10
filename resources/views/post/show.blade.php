@@ -28,7 +28,8 @@
                 <h1 class="text-3xl font-bold text-center">{{ $post->title }}</h1>
 
                 <!-- Edit btns -->
-                @if($post->user_id === Auth::id())
+                @auth
+                @if($post->user_id === Auth::id() || Auth::user()->isAdmin())
                 <div class="mt-8 pt-4 border-t">
                     <x-primary-button href="{{ route('post.edit', $post->id) }}" class="mr-4">Edit Post</x-primary-button>
                     <form action="{{ route('post.destroy', $post) }}" method="POST" class="inline-block">
@@ -38,6 +39,7 @@
                     </form>
                 </div>
                 @endif
+                @endauth
 
                 <!-- Post Stats -->
                 <x-stats-button :post="$post"/>

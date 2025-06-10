@@ -1,0 +1,14 @@
+{
+    "min.string": "Password needs to have a minimum of :min characters.",
+    "confirmed": "Passwords do not match.",
+    "required": "Password is required.",
+    "string": "Password must be a string.",
+    "password": "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+    "email": "Email must be a valid email address.",
+    "unique": "Email has already been taken.",
+    "exists": "The selected email is invalid.",
+    "max.string": "Email must not exceed :max characters.",
+    "array": "The selected email must be an array.",
+    "boolean": "The selected email must be true or false.",
+    "integer": "The selected email must be an integer."
+}
